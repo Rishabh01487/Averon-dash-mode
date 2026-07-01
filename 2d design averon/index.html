@@ -7,6 +7,15 @@ function mkBlockTex(h,clr){
   cx.fillStyle="rgba(34,211,238,0.04)";cx.roundRect(0,0,256,64,8);cx.fill();
   cx.strokeStyle="rgba(34,211,238,0.06)";cx.lineWidth=1;
   for(var i=0;i<8;i++){cx.beginPath();cx.moveTo(i*32,0);cx.lineTo(i*32,64);cx.stroke();}
+  cx.fillStyle="#"+clr.toString(16).padStart(6,"0");cx.font="bold 14px monospace";cx.textAlign="left";cx.textBaseline="middle";
+  cx.fillText(h,16,22);cx.font="10px monospace";cx.fillStyle="rgba(255,255,255,0.35)";
+  cx.fillText("SHA-256 \u25cf "+Math.floor(Math.random()*999999)+" nonce",16,46);
+  return new THREE.CanvasTexture(c);
+}
+for(var i=0;i<BC;i++){
+  var a=(i/(BC-1))*PI*0.8-PI*0.4;
+  var x=Math.sin(a)*5.5,y=1.5+Math.cos(a*0.8)*2.2,z=-1.5-Math.cos(a)*1.5;
+  var grp=new THREE.Group();
 </script>
 </body>
 </html>
