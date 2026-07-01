@@ -169,6 +169,15 @@ var cM2=new THREE.LineDashedMaterial({color:C.cyan,dashSize:0.3,gapSize:0.2,tran
 eAs.forEach(function(a){var pts=[new THREE.Vector3(a.group.position.x,1.5,a.group.position.z),new THREE.Vector3(0,0,0)];var g2=new THREE.BufferGeometry().setFromPoints(pts);var l=new THREE.Line(g2,cM2.clone());l.computeLineDistances();ecoG.add(l);});
 var glbG=new THREE.Group();scene.add(glbG);
 var glbWM=new THREE.MeshBasicMaterial({color:C.blueL,transparent:true,opacity:0,wireframe:true});
+var glbW=new THREE.Mesh(new THREE.SphereGeometry(22,28,20),glbWM);glbW.position.y=0;glbG.add(glbW);
+var glbWM2=new THREE.MeshBasicMaterial({color:C.cyan,transparent:true,opacity:0,wireframe:true});
+var glbW2=new THREE.Mesh(new THREE.SphereGeometry(20,18,14),glbWM2);glbW2.position.y=0;glbW2.rotation.x=0.3;glbG.add(glbW2);
+var glbLM=new THREE.LineBasicMaterial({color:C.violet,transparent:true,opacity:0});
+for(var i=0;i<24;i++){var a=(i/24)*TAU;var pts=[new THREE.Vector3(Math.cos(a)*22,0,Math.sin(a)*22),new THREE.Vector3(0,9,0),new THREE.Vector3(Math.cos(a+PI/24)*22,0,Math.sin(a+PI/24)*22)];var g2=new THREE.BufferGeometry().setFromPoints(pts);glbG.add(new THREE.Line(g2,glbLM));}
+var glbLM2=new THREE.LineBasicMaterial({color:C.emerald,transparent:true,opacity:0});
+for(var i=0;i<12;i++){var a=(i/12)*TAU+PI/12;var pts=[new THREE.Vector3(Math.cos(a)*16,6,Math.sin(a)*16),new THREE.Vector3(Math.cos(a+PI/12)*18,3,Math.sin(a+PI/12)*18),new THREE.Vector3(Math.cos(a+PI/6)*16,-4,Math.sin(a+PI/6)*16)];var g2=new THREE.BufferGeometry().setFromPoints(pts);glbG.add(new THREE.Line(g2,glbLM2));}
+var glbDM=new THREE.PointsMaterial({color:C.cyan,size:0.12,transparent:true,opacity:0,blending:THREE.AdditiveBlending});
+var glbDC=800;var glbDP=new Float32Array(glbDC*3);
 </script>
 </body>
 </html>
