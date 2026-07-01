@@ -349,6 +349,15 @@ function animate(){
   bgGlassR.material.opacity=lerp(0,0.04,easeOut(clamp((gbA-0.3)*2,0,1)))*gbHide;
   bdr1.material.opacity=lerp(0,0.05,easeOut(clamp((gbA-0.1)*2,0,1)))*gbHide;
   bdr2.material.opacity=lerp(0,0.03,easeOut(clamp((gbA-0.2)*2,0,1)))*gbHide;
+  bdr3.material.opacity=lerp(0,0.03,easeOut(clamp((gbA-0.2)*2,0,1)))*gbHide;
+  bgDataSprM.opacity=lerp(0,0.1,easeOut(clamp((gbA-0.3)*2,0,1)))*gbHide;
+  // Scene 4: Tokenization
+  var s4=normalize(t,7,10.5);
+  tokRM.opacity=0.4*clamp(s4*2,0,1)*clamp((1-normalize(t,14,15)),0,1);
+  tokIRM.opacity=0.25*clamp(s4*2,0,1)*clamp((1-normalize(t,14,15)),0,1);
+  tokPMat.opacity=0.2*clamp(s4*2,0,1)*clamp((1-normalize(t,14,15)),0,1);
+  tokDM.opacity=0.06*clamp(s4*2,0,1)*clamp((1-normalize(t,14,15)),0,1);
+  fracRing.material.opacity=0.08*clamp((s4-0.2)*2,0,1)*clamp((1-normalize(t,14,15)),0,1);
 </script>
 </body>
 </html>
