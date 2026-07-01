@@ -430,6 +430,15 @@ function animate(){
   ribbons.forEach(function(rb,i){var pts=rb.pts;for(var j=0;j<pts.length;j++){var ang=j/pts.length*TAU+rb.phase+t*0.08;var r=8+Math.sin(t*0.1+j*0.5+rb.phase)*4;pts[j].set(Math.cos(ang)*r,Math.sin(j*PI/5.5+t*0.06+rb.phase)*3+2,Math.sin(ang)*r);}rb.curve.points=pts;var newGeo=new THREE.TubeGeometry(rb.curve,40,0.03,6,false);rb.mesh.geometry.dispose();rb.mesh.geometry=newGeo;});
   // Dot traces
   var dtChildren=dotTraceG.children;for(var tIdx=0;tIdx<dtChildren.length;tIdx++){var p=dtChildren[tIdx];if(!p||!p.geometry)continue;var pos=p.geometry.attributes.position.array;var aOff=tIdx*PI/2+t*0.03;for(var i=0;i<pos.length/3;i++){var prog=i/(pos.length/3-1);var ang=aOff+prog*TAU*1.5;var r=6+Math.sin(prog*PI*4+t*0.05+tIdx)*3;pos[i*3]=Math.cos(ang)*r;pos[i*3+1]=Math.sin(prog*PI*2+t*0.04+tIdx)*4+Math.sin(ang+t*0.03)*1.5;pos[i*3+2]=Math.sin(ang)*r;}p.geometry.attributes.position.needsUpdate=true;}
+  // Lights
+  glowOrb1.position.x=-22+Math.sin(t*0.04)*4;glowOrb1.position.z=-28+Math.cos(t*0.035)*5;
+  glowOrb2.position.x=28+Math.sin(t*0.035+1)*4;glowOrb2.position.z=-32+Math.cos(t*0.04)*5;
+  glowOrb3.position.x=5+Math.sin(t*0.05+2)*5;glowOrb3.position.z=-22+Math.cos(t*0.03)*5;
+  rmL.position.x=Math.sin(t*0.12)*8;rmL.position.z=Math.cos(t*0.12)*8;
+  aL.position.x=Math.sin(t*0.2)*6;aL.position.z=Math.cos(t*0.2)*6;
+  bLp.position.x=Math.sin(t*0.18+1)*5;bLp.position.z=Math.cos(t*0.18+1)*5;
+  renderer.render(scene,camera);updL(camera);
+}
 </script>
 </body>
 </html>
