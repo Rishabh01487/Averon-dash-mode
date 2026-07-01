@@ -142,6 +142,15 @@ gateways.forEach(function(name,i){
 });
 var amlShield=new THREE.Mesh(new THREE.RingGeometry(1.2,1.5,24),new THREE.MeshBasicMaterial({color:C.emerald,transparent:true,opacity:0,side:THREE.DoubleSide}));amlShield.position.set(0,3.5,0);finG.add(amlShield);
 var amlFlags=new THREE.Group();scene.add(amlFlags);
+for(var i=0;i<8;i++){
+  var flag=new THREE.Mesh(new THREE.BoxGeometry(0.15,0.35,0.02),new THREE.MeshBasicMaterial({color:[C.violet,C.gold,C.pink,C.blue,C.emerald,C.cyan,C.silver,C.gold][i],transparent:true,opacity:0}));
+  var a=(i/8)*TAU;flag.position.set(Math.cos(a)*1.8,3.5+Math.sin(a*2)*0.3,Math.sin(a)*1.8);flag.rotation.z=Math.sin(a)*0.2;amlFlags.add(flag);
+}
+var finPC=300;var finPP=new Float32Array(finPC*3);var finPPh=new Float32Array(finPC);
+for(var i=0;i<finPC;i++){finPPh[i]=Math.random()*TAU;finPP[i*3]=(Math.random()-0.5)*8;finPP[i*3+1]=Math.random()*4;finPP[i*3+2]=(Math.random()-0.5)*6;}
+var finPG=new THREE.BufferGeometry();finPG.setAttribute("position",new THREE.BufferAttribute(finPP,3));
+var finPM=new THREE.PointsMaterial({color:C.cyan,size:0.03,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+var finP=new THREE.Points(finPG,finPM);finG.add(finP);
 </script>
 </body>
 </html>
