@@ -367,6 +367,15 @@ function animate(){
   for(var i=0;i<tkCount;i++){var ph=tkPh[i],sx=tkSP[i*3],sy=tkSP[i*3+1],sz=tkSP[i*3+2],ex=tkEP[i*3],ey=tkEP[i*3+1],ez=tkEP[i*3+2];var spiral=Math.sin(t*3+ph)*0.6*(1-sp);pA[i*3]=lerp(sx+Math.cos(t*4+ph)*spiral*0.3,ex,sp)+Math.cos(t*0.5+ph)*0.08*sp;pA[i*3+1]=lerp(sy+Math.cos(t*2+ph*0.5)*spiral*0.12,ey,sp)+Math.sin(t+ph)*0.03*sp;pA[i*3+2]=lerp(sz+Math.sin(t*4+ph)*spiral*0.3,ez,sp)+Math.sin(t*0.5+ph)*0.08*sp;}
   tkp.geometry.attributes.position.needsUpdate=true;tkm.opacity=clamp((tkAp-0.2)*2,0,1);
   var escA=normalize(t,7.5,10);escM.opacity=lerp(0,0.4,easeOut(escA))*clamp((1-normalize(t,14,15)),0,1);escL.material.opacity=lerp(0,0.3,easeOut(escA))*clamp((1-normalize(t,14,15)),0,1);escBox.position.y=0.5+Math.sin(t*0.8)*0.04;
+  document.getElementById('l-tok-title').style.opacity=clamp((s4-0.2)*2,0,1)*clamp((1-normalize(t,14,15)),0,1);
+  document.getElementById('l-tok-fractional').style.opacity=clamp((s4-0.1)*2,0,1)*clamp((1-normalize(t,14,15)),0,1);
+  document.getElementById('l-tok-math').style.opacity=clamp((s4-0.3)*2,0,1)*clamp((1-normalize(t,14,15)),0,1);
+  document.getElementById('l-tok-escrow').style.opacity=clamp(normalize(t,7.5,9.5)*2,0,1)*clamp((1-normalize(t,14,15)),0,1);
+  // Scene 5: Trading
+  var s5=normalize(t,9,12.5);
+  trInvs.forEach(function(inv,i){var ap=clamp((s5-0.03*(i%20))*2,0,1);inv.mesh.children.forEach(function(m){if(m.material)m.material.opacity=lerp(0,1,easeOut(ap));});inv.mesh.position.y=inv.baseY+Math.sin(t*0.7+inv.phase)*0.03;});
+  trPths.forEach(function(tp,i){tp.line.material.opacity=0.12*clamp(s5*2,0,1)*(0.4+0.6*Math.sin(t*tp.speed+tp.phase));});
+  trPM.opacity=0.4*clamp(s5*2,0,1);
 </script>
 </body>
 </html>
