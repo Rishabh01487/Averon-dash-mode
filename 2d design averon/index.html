@@ -421,6 +421,15 @@ function animate(){
   var vfA=normalize(t,2,5);vFM2.opacity=0.3*clamp(vfA*2,0,1);vfLM.opacity=0.03*clamp(vfA*2,0,1);
   var vfpa=vfP.geometry.attributes.position.array;
   for(var i=0;i<vFC;i++){var ph=vFPh[i];var prog=(t*vFSp[i]+ph)%1;var idx=Math.floor(prog*(flowPath.length-1));var nxt=Math.min(idx+1,flowPath.length-1);var lr=prog*(flowPath.length-1)-idx;var p0=flowPath[idx],p1=flowPath[nxt];vfpa[i*3]=lerp(p0.x,p1.x,lr)+Math.sin(t*2+ph)*0.12;vfpa[i*3+1]=lerp(p0.y,p1.y,lr)+Math.cos(t*1.5+ph)*0.08;vfpa[i*3+2]=lerp(p0.z,p1.z,lr)+Math.sin(t*1.8+ph)*0.12;}
+  vfP.geometry.attributes.position.needsUpdate=true;
+  // Ambient
+  updBg(t);updGlitch(t);envWallM.opacity=0.02+Math.sin(t*0.06)*0.015;stars.rotation.y=t*0.003;stars.rotation.x=Math.sin(t*0.002)*0.02;
+  var apa=atm.geometry.attributes.position.array;for(var i=0;i<aPC;i++){apa[i*3]+=Math.sin(t*0.05+i)*0.001;apa[i*3+1]+=Math.cos(t*0.03+i)*0.0005;if(apa[i*3+1]>35)apa[i*3+1]=-5;if(apa[i*3+1]<-5)apa[i*3+1]=35;}
+  atm.geometry.attributes.position.needsUpdate=true;
+  // Ribbons
+  ribbons.forEach(function(rb,i){var pts=rb.pts;for(var j=0;j<pts.length;j++){var ang=j/pts.length*TAU+rb.phase+t*0.08;var r=8+Math.sin(t*0.1+j*0.5+rb.phase)*4;pts[j].set(Math.cos(ang)*r,Math.sin(j*PI/5.5+t*0.06+rb.phase)*3+2,Math.sin(ang)*r);}rb.curve.points=pts;var newGeo=new THREE.TubeGeometry(rb.curve,40,0.03,6,false);rb.mesh.geometry.dispose();rb.mesh.geometry=newGeo;});
+  // Dot traces
+  var dtChildren=dotTraceG.children;for(var tIdx=0;tIdx<dtChildren.length;tIdx++){var p=dtChildren[tIdx];if(!p||!p.geometry)continue;var pos=p.geometry.attributes.position.array;var aOff=tIdx*PI/2+t*0.03;for(var i=0;i<pos.length/3;i++){var prog=i/(pos.length/3-1);var ang=aOff+prog*TAU*1.5;var r=6+Math.sin(prog*PI*4+t*0.05+tIdx)*3;pos[i*3]=Math.cos(ang)*r;pos[i*3+1]=Math.sin(prog*PI*2+t*0.04+tIdx)*4+Math.sin(ang+t*0.03)*1.5;pos[i*3+2]=Math.sin(ang)*r;}p.geometry.attributes.position.needsUpdate=true;}
 </script>
 </body>
 </html>
