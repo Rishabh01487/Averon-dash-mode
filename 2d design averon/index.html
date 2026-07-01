@@ -160,6 +160,15 @@ ecoTypes.forEach(function(a,i){
   if(shapeIdx===0)geo=new THREE.BoxGeometry(s,s,s);else if(shapeIdx===1)geo=new THREE.SphereGeometry(s*0.8,12,12);else if(shapeIdx===2)geo=new THREE.ConeGeometry(s*0.7,s,8);else if(shapeIdx===3)geo=new THREE.TorusGeometry(s*0.6,s*0.2,8,12);else geo=new THREE.TorusKnotGeometry(s*0.5,s*0.15,12,8);
   var g=new THREE.Mesh(geo,new THREE.MeshPhysicalMaterial({color:a.color,metalness:0.3,roughness:0.2,transparent:true,opacity:0,emissive:a.color,emissiveIntensity:0.15,clearcoat:0.3}));
   var glowRing=new THREE.Mesh(new THREE.RingGeometry(s*0.5,s*0.7,24),new THREE.MeshBasicMaterial({color:a.color,transparent:true,opacity:0,side:THREE.DoubleSide,blending:THREE.AdditiveBlending}));glowRing.rotation.x=-PI/2;glowRing.position.y=-0.1;
+  var grp=new THREE.Group();grp.add(g);grp.add(glowRing);
+  var ang=(i/ecoTypes.length)*TAU-Math.PI/2;
+  grp.position.set(Math.cos(ang)*eR2,1.5+Math.sin(ang*2)*0.5,Math.sin(ang)*eR2);
+  ecoG.add(grp);eAs.push({group:grp,mesh:g,glowRing:glowRing,angle:ang,phase:Math.random()*TAU,name:a.name,color:a.color,size:a.size});
+});
+var cM2=new THREE.LineDashedMaterial({color:C.cyan,dashSize:0.3,gapSize:0.2,transparent:true,opacity:0});
+eAs.forEach(function(a){var pts=[new THREE.Vector3(a.group.position.x,1.5,a.group.position.z),new THREE.Vector3(0,0,0)];var g2=new THREE.BufferGeometry().setFromPoints(pts);var l=new THREE.Line(g2,cM2.clone());l.computeLineDistances();ecoG.add(l);});
+var glbG=new THREE.Group();scene.add(glbG);
+var glbWM=new THREE.MeshBasicMaterial({color:C.blueL,transparent:true,opacity:0,wireframe:true});
 </script>
 </body>
 </html>
