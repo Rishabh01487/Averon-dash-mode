@@ -124,6 +124,15 @@ var trP=new THREE.Points(trPG,trPM);trG.add(trP);
 var finG=new THREE.Group();scene.add(finG);
 var kycColors=[C.silver,C.blue,C.violet,C.gold];
 var kycTiers=[];
+for(var i=0;i<4;i++){
+  var g=new THREE.Group();
+  var shield=new THREE.Mesh(new THREE.ShapeGeometry((function(){var s=new THREE.Shape();s.moveTo(0,0.8);s.lineTo(-0.5,-0.2);s.lineTo(-0.5,-0.6);s.lineTo(0.5,-0.6);s.lineTo(0.5,-0.2);s.closePath();return s;})()),new THREE.MeshBasicMaterial({color:kycColors[i],transparent:true,opacity:0,side:THREE.DoubleSide}));g.add(shield);
+  var check=new THREE.Mesh(new THREE.PlaneGeometry(0.2,0.12),new THREE.MeshBasicMaterial({color:0xffffff,transparent:true,opacity:0,side:THREE.DoubleSide}));check.position.set(0,0.1,0.01);g.add(check);
+  var ring2=new THREE.Mesh(new THREE.RingGeometry(0.4,0.5,16),new THREE.MeshBasicMaterial({color:kycColors[i],transparent:true,opacity:0,side:THREE.DoubleSide}));ring2.position.set(0,0,0);g.add(ring2);
+  g.position.set((i-1.5)*2.5,2,0);finG.add(g);kycTiers.push({g:g,shield:shield,check:check,ring2:ring2,tier:i,color:kycColors[i]});
+}
+var payG=new THREE.Group();scene.add(payG);
+var gateways=["Razorpay","Stripe","UPI","Wire"];
 </script>
 </body>
 </html>
