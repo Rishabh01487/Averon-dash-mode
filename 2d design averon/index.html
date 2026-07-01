@@ -25,6 +25,15 @@ for(var i=0;i<BC;i++){
   var ring=new THREE.Mesh(new THREE.RingGeometry(0.7,0.8,24),new THREE.MeshBasicMaterial({color:C.blueL,transparent:true,opacity:0,side:THREE.DoubleSide,blending:THREE.AdditiveBlending}));ring.rotation.x=-PI/2;ring.position.y=-0.36;grp.add(ring);
   var dgs=[];
   for(var j=0;j<12;j++){
+    var dMat=new THREE.MeshBasicMaterial({color:Math.random()>0.5?C.cyan:C.violet,transparent:true,opacity:0});
+    var dMesh=new THREE.Mesh(new THREE.SphereGeometry(0.04,6,6),dMat);
+    var da=Math.random()*TAU,dr=0.6+Math.random()*0.4,dyO=(Math.random()-0.5)*0.7;
+    dMesh.position.set(Math.cos(da)*dr,dyO,Math.sin(da)*dr);
+    dMesh.userData={angle:da,rad:dr,dy:dyO,speed:0.3+Math.random()*0.5,phase:Math.random()*TAU};grp.add(dMesh);dgs.push(dMesh);
+  }
+  grp.position.set(x,y,z);grp.rotation.y=-a*0.2;bcG.add(grp);bcB.push({group:grp,body:body,shell:shell,edge:edge,ring:ring,dt:dtPlane,dtMat:dtMat,dgs:dgs,clr:clr,a:a});
+  if(i<BC-1){
+    var na=((i+1)/(BC-1))*PI*0.8-PI*0.4;
 </script>
 </body>
 </html>
