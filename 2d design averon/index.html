@@ -385,6 +385,15 @@ function animate(){
   obG.children.forEach(function(c){if(c.isMesh&&c.geometry.type==="BoxGeometry"&&c.material!==obBgM){c.material.opacity=lerp(0,0.4,easeOut(obA))*clamp((1-normalize(t,17,18)),0,1);}});
   obPts.forEach(function(p,i){p.material.opacity=lerp(0,0.3,easeOut(obA))*(0.3+0.7*Math.sin(t*2+i))*clamp((1-normalize(t,17,18)),0,1);p.position.y+=Math.sin(t+i)*0.002;});
   document.getElementById('l-tr-title').style.opacity=clamp((s5-0.2)*2,0,1)*clamp((1-normalize(t,17,18)),0,1);
+  document.getElementById('l-tr-circuit').style.opacity=clamp((s5-0.1)*2,0,1)*clamp((1-normalize(t,17,18)),0,1);
+  document.getElementById('l-tr-price-time').style.opacity=clamp((s5-0.3)*2,0,1)*clamp((1-normalize(t,17,18)),0,1);
+  document.getElementById('l-tr-investors').style.opacity=clamp((s5-0.4)*2,0,1)*clamp((1-normalize(t,17,18)),0,1);
+  // Scene 6: Financial
+  var s6=normalize(t,11,14.5);
+  kycTiers.forEach(function(kt,i){var ap=clamp((s6-i*0.08)*2,0,1);kt.shield.material.opacity=lerp(0,0.3,easeOut(ap));kt.check.material.opacity=lerp(0,0.15,easeOut(ap));kt.ring2.material.opacity=lerp(0,0.1,easeOut(ap))*(0.4+0.6*Math.sin(t*1.5+i));kt.ring2.scale.setScalar(1+Math.sin(t*0.8+i)*0.1);});
+  gwMeshes.forEach(function(gw,i){var ap=clamp((s6-i*0.06-0.6)*2,0,1);gw.panel.material.opacity=lerp(0,0.15,easeOut(ap));gw.glow.material.opacity=lerp(0,0.08,easeOut(ap))*(0.5+0.5*Math.sin(t+i));});
+  amlShield.material.opacity=0.06*clamp((s6-0.3)*2,0,1)*Math.sin(t*0.8)*0.5+0.03;
+  var amlFlagsArr=amlFlags.children;amlFlagsArr.forEach(function(f,i){f.material.opacity=lerp(0,0.2,easeOut(clamp((s6-0.3)*2,0,1)))*(0.3+0.7*Math.sin(t*1.5+i*0.8));f.position.y=3.5+Math.sin(t*0.5+i)*0.2;});
 </script>
 </body>
 </html>
