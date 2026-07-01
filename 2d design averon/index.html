@@ -1,0 +1,12 @@
+<!DOCTYPE html><html><head><title>Averon</title></head><body><div id="ui"></div><div id="enter-btn">Enter</div><script>
+var bcG=new THREE.Group();scene.add(bcG);
+var BC=7;var bcB=[];
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){this.moveTo(x+r,y);this.lineTo(x+w-r,y);this.quadraticCurveTo(x+w,y,x+w,y+r);this.lineTo(x+w,y+h-r);this.quadraticCurveTo(x+w,y+h,x+w-r,y+h);this.lineTo(x+r,y+h);this.quadraticCurveTo(x,y+h,x,y+h-r);this.lineTo(x,y+r);this.quadraticCurveTo(x,y,x+r,y);this.closePath();return this;};
+function mkBlockTex(h,clr){
+  var c=document.createElement("canvas");c.width=256;c.height=64;var cx=c.getContext("2d");
+  cx.fillStyle="rgba(34,211,238,0.04)";cx.roundRect(0,0,256,64,8);cx.fill();
+  cx.strokeStyle="rgba(34,211,238,0.06)";cx.lineWidth=1;
+  for(var i=0;i<8;i++){cx.beginPath();cx.moveTo(i*32,0);cx.lineTo(i*32,64);cx.stroke();}
+</script>
+</body>
+</html>
