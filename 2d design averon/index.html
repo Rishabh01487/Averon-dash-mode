@@ -286,6 +286,15 @@ var ckf=[
   {t:18,th:PI*0.15,ph:0.08,r:13,tx:2,ty:2.5,tz:-8},
   {t:19.5,th:PI*0.4,ph:0.06,r:20,tx:0,ty:0.5,tz:0},
   {t:21,th:PI*0.6,ph:0.05,r:24,tx:0,ty:0.8,tz:0},
+  {t:23,th:PI*0.8,ph:0.04,r:30,tx:0,ty:0,tz:0},
+  {t:25,th:PI*0.15,ph:0.03,r:38,tx:0,ty:-1,tz:0},
+  {t:27,th:PI*0.22,ph:0.02,r:48,tx:0,ty:-2,tz:0},
+  {t:29,th:PI*0.28,ph:0.01,r:60,tx:0,ty:-3,tz:0},
+];
+function gCS(time){time=Math.max(0,Math.min(time,DURATION));var b=ckf[0],a=ckf[ckf.length-1];for(var i=0;i<ckf.length-1;i++)if(time>=ckf[i].t&&time<=ckf[i+1].t){b=ckf[i];a=ckf[i+1];break;}var r=a.t-b.t,lt=r>0?clamp((time-b.t)/r,0,1):0,et=easeInOut(lt);return{th:lerp(b.th,a.th,et),ph:lerp(b.ph,a.ph,et),r:lerp(b.r,a.r,et),tg:[lerp(b.tx,a.tx,et),lerp(b.ty,a.ty,et),lerp(b.tz,a.tz,et)]};}
+var clock=new THREE.Clock();var elps=0;
+function updL(cam){
+  var vw=window.innerWidth,vh=window.innerHeight;
 </script>
 </body>
 </html>
