@@ -52,6 +52,15 @@ var bcDigP=new THREE.Points(bcDigG,bcDigM);bcG.add(bcDigP);
 var merkleG=new THREE.Group();scene.add(merkleG);
 function mkMerkleTree(){
   var g=new THREE.Group();var nodes=[];
+  for(var i=0;i<8;i++){var leaf=new THREE.Mesh(new THREE.CircleGeometry(0.08,6),new THREE.MeshBasicMaterial({color:C.emerald,transparent:true,opacity:0,side:THREE.DoubleSide}));leaf.position.set((i-3.5)*0.35,0,0);g.add(leaf);nodes.push(leaf);}
+  for(var i=0;i<4;i++){var parent=new THREE.Mesh(new THREE.CircleGeometry(0.1,6),new THREE.MeshBasicMaterial({color:C.blue,transparent:true,opacity:0,side:THREE.DoubleSide}));parent.position.set((i-1.5)*0.7,0.5,0);g.add(parent);nodes.push(parent);for(var j=0;j<2;j++){var pts=[new THREE.Vector3(nodes[i*2+j].position.x,0,0),new THREE.Vector3(parent.position.x,0.5,0)];var line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:C.blueL,transparent:true,opacity:0}));g.add(line);}}
+  for(var i=0;i<2;i++){var parent=new THREE.Mesh(new THREE.CircleGeometry(0.12,6),new THREE.MeshBasicMaterial({color:C.violet,transparent:true,opacity:0,side:THREE.DoubleSide}));parent.position.set((i-0.5)*1.4,1.0,0);g.add(parent);nodes.push(parent);for(var j=0;j<2;j++){var ci=8+i*2+j;var pts=[new THREE.Vector3(nodes[ci].position.x,0.5,0),new THREE.Vector3(parent.position.x,1.0,0)];var line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:C.violet,transparent:true,opacity:0}));g.add(line);}}
+  var root=new THREE.Mesh(new THREE.CircleGeometry(0.16,8),new THREE.MeshBasicMaterial({color:C.gold,transparent:true,opacity:0,side:THREE.DoubleSide}));root.position.set(0,1.5,0);g.add(root);nodes.push(root);
+  for(var j=0;j<2;j++){var ci=12+j;var pts=[new THREE.Vector3(nodes[ci].position.x,1.0,0),new THREE.Vector3(0,1.5,0)];var line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color:C.gold,transparent:true,opacity:0}));g.add(line);}
+  return {g:g,nodes:nodes};
+}
+var merkle=mkMerkleTree();merkleG.add(merkle.g);merkleG.position.set(-1.5,3.5,-6);
+var tokG=new THREE.Group();scene.add(tokG);
 </script>
 </body>
 </html>
