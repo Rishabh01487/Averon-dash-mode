@@ -79,6 +79,15 @@ escrowG.position.set(0,1.5,-6);
 var tkCount=4000;var tkPos=new Float32Array(tkCount*3);var tkCol=new Float32Array(tkCount*3);var tkPh=new Float32Array(tkCount);var tkSP=new Float32Array(tkCount*3);var tkEP=new Float32Array(tkCount*3);
 for(var i=0;i<tkCount;i++){
   var th=Math.random()*TAU,ph=Math.acos(2*Math.random()-1),r=0.3+Math.random()*1.5;
+  tkPos[i*3]=Math.sin(ph)*Math.cos(th)*r;tkPos[i*3+1]=2.5+Math.sin(ph)*Math.sin(th)*r;tkPos[i*3+2]=Math.cos(ph)*r;
+  tkSP[i*3]=tkPos[i*3];tkSP[i*3+1]=tkPos[i*3+1];tkSP[i*3+2]=tkPos[i*3+2];tkPh[i]=Math.random()*TAU;
+  var c=Math.random();if(c<0.33){tkCol[i*3]=0.13;tkCol[i*3+1]=0.83;tkCol[i*3+2]=0.91;}else if(c<0.6){tkCol[i*3]=0.91;tkCol[i*3+1]=0.45;tkCol[i*3+2]=0.71;}else if(c<0.8){tkCol[i*3]=0.73;tkCol[i*3+1]=0.49;tkCol[i*3+2]=0.96;}else{tkCol[i*3]=0.2;tkCol[i*3+1]=0.83;tkCol[i*3+2]=0.6;}
+  var a2=Math.random()*TAU,d2=6+Math.random()*3;tkEP[i*3]=Math.cos(a2)*d2;tkEP[i*3+1]=0.15+Math.random()*0.6;tkEP[i*3+2]=Math.sin(a2)*d2;
+}
+var tkg=new THREE.BufferGeometry();tkg.setAttribute("position",new THREE.BufferAttribute(tkPos,3));tkg.setAttribute("color",new THREE.BufferAttribute(tkCol,3));
+var tkm=new THREE.PointsMaterial({size:0.05,transparent:true,opacity:0,vertexColors:true,blending:THREE.AdditiveBlending,depthWrite:false,sizeAttenuation:true});
+var tkp=new THREE.Points(tkg,tkm);tokG.add(tkp);
+var trG=new THREE.Group();scene.add(trG);
 </script>
 </body>
 </html>
