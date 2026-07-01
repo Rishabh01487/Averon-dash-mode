@@ -205,6 +205,15 @@ var bgGlassR=new THREE.Mesh(new THREE.PlaneGeometry(40,35),bgGlassM.clone());bgG
 function mkRoundRectGeo(w,h,r){var s=new THREE.Shape();s.moveTo(-w/2+r,-h/2);s.lineTo(w/2-r,-h/2);s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);s.lineTo(w/2,h/2-r);s.quadraticCurveTo(w/2,h/2,w/2-r,h/2);s.lineTo(-w/2+r,h/2);s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);s.lineTo(-w/2,-h/2+r);s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);return new THREE.ShapeGeometry(s);}
 function addGlBorder(mesh,w,h,r,clr){var bGeo=new THREE.EdgesGeometry(mkRoundRectGeo(w,h,r));var bLine=new THREE.LineSegments(bGeo,new THREE.LineBasicMaterial({color:clr,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));bLine.position.copy(mesh.position);bLine.rotation.copy(mesh.rotation);scene.add(bLine);return bLine;}
 var bdr1=addGlBorder(bgGlass,59,39,2,C.cyan);
+var bdr2=addGlBorder(bgGlassL,39,34,2,C.blueL);
+var bdr3=addGlBorder(bgGlassR,39,34,2,C.violet);
+function mkArchCanvas(){
+  var c=document.createElement("canvas");c.width=1024;c.height=640;var cx=c.getContext("2d");
+  cx.strokeStyle="rgba(34,211,238,0.03)";cx.lineWidth=1;
+  for(var x=0;x<1024;x+=30){cx.beginPath();cx.moveTo(x,0);cx.lineTo(x,640);cx.stroke();}
+  for(var y=0;y<640;y+=30){cx.beginPath();cx.moveTo(0,y);cx.lineTo(1024,y);cx.stroke();}
+  cx.fillStyle="rgba(34,211,238,0.04)";cx.roundRect(40,30,400,36,18);cx.fill();
+  cx.fillStyle="rgba(34,211,238,0.5)";cx.font="bold 16px monospace";cx.textAlign="left";cx.textBaseline="middle";
 </script>
 </body>
 </html>
