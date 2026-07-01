@@ -268,6 +268,15 @@ var lDefs=[
 ];
 lDefs.forEach(function(d){var el=document.createElement("div");el.className="label"+(d.cls?" "+d.cls:"");el.textContent=d.text;el.id="l-"+d.id;if(d.id==="title-main"){el.style.color="#22d3ee";el.style.fontSize="32px";el.style.letterSpacing="10px";el.style.fontWeight="800";el.style.background="transparent";el.style.backdropFilter="none";el.style.border="none";el.style.boxShadow="none";}if(d.id==="eco-title"){el.style.color="#22d3ee";el.style.fontSize="28px";el.style.letterSpacing="8px";el.style.fontWeight="700";el.style.background="transparent";el.style.backdropFilter="none";el.style.border="none";el.style.boxShadow="none";}ui2.appendChild(el);lbs[d.id]={el:el,wp:d.wp};});
 ecoTypes.forEach(function(a,i){var ang=(i/ecoTypes.length)*TAU-Math.PI/2;var el=document.createElement("div");el.className="label small";el.textContent=a.name;el.id="l-ec-"+i;ui2.appendChild(el);lbs["ec-"+i]={el:el,wp:[Math.cos(ang)*30,1.8+Math.sin(ang*2)*0.5,Math.sin(ang)*30]};});
+var lcEls=[];var lcStps=["Identity","Wallet","Mint Asset","Feed the AI","Awaken","Compliance","Tokenize","Invest","Fund","Payout","Refund","Archive"];
+lcStps.forEach(function(s,i){var c=document.createElement("div");c.className="label lifecycle";var n=document.createElement("div");n.className="num";n.textContent=i+1;var t=document.createElement("div");t.className="text";t.textContent=s;c.appendChild(n);c.appendChild(t);if(i<lcStps.length-1){var a=document.createElement("div");a.className="arrow";a.innerHTML="-";c.appendChild(a);}ui2.appendChild(c);lcEls.push({el:c,step:s,index:i});});
+var ckf=[
+  {t:0,th:0.2,ph:0.46,r:14,tx:-5,ty:3.5,tz:0},
+  {t:1.5,th:0.08,ph:0.44,r:10,tx:-5,ty:3.8,tz:0},
+  {t:3,th:-0.04,ph:0.4,r:8,tx:-5,ty:3,tz:0},
+  {t:4.5,th:0.06,ph:0.34,r:12,tx:4,ty:1.8,tz:-1},
+  {t:6,th:-0.04,ph:0.32,r:10,tx:4,ty:2.2,tz:-1},
+  {t:7.5,th:PI*0.22,ph:0.28,r:14,tx:0,ty:2.2,tz:-3},
 </script>
 </body>
 </html>
