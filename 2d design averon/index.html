@@ -34,6 +34,15 @@ for(var i=0;i<BC;i++){
   grp.position.set(x,y,z);grp.rotation.y=-a*0.2;bcG.add(grp);bcB.push({group:grp,body:body,shell:shell,edge:edge,ring:ring,dt:dtPlane,dtMat:dtMat,dgs:dgs,clr:clr,a:a});
   if(i<BC-1){
     var na=((i+1)/(BC-1))*PI*0.8-PI*0.4;
+    var nx=Math.sin(na)*5.5,ny=1.5+Math.cos(na*0.8)*2.2,nz=-1.5-Math.cos(na)*1.5;
+    var dx=nx-x,dy=ny-y,dz=nz-z;var len=Math.sqrt(dx*dx+dy*dy+dz*dz);
+    var beam=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.03,len,6,1,true),new THREE.MeshBasicMaterial({color:C.blueL,transparent:true,opacity:0,blending:THREE.AdditiveBlending,side:THREE.DoubleSide}));beam.position.set((x+nx)/2,(y+ny)/2,(z+nz)/2);beam.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),new THREE.Vector3(dx,dy,dz).normalize());bcG.add(beam);bcB[i].beam=beam;
+  }
+}
+var bcPC=300;var bcPP=new Float32Array(bcPC*3);var bcPPh=new Float32Array(bcPC);
+for(var i=0;i<bcPC;i++){bcPPh[i]=Math.random()*TAU;bcPP[i*3]=0;bcPP[i*3+1]=0;bcPP[i*3+2]=0;}
+var bcPG=new THREE.BufferGeometry();bcPG.setAttribute("position",new THREE.BufferAttribute(bcPP,3));
+var bcPM=new THREE.PointsMaterial({color:C.blueL,size:0.06,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
 </script>
 </body>
 </html>
