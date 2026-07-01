@@ -178,6 +178,15 @@ var glbLM2=new THREE.LineBasicMaterial({color:C.emerald,transparent:true,opacity
 for(var i=0;i<12;i++){var a=(i/12)*TAU+PI/12;var pts=[new THREE.Vector3(Math.cos(a)*16,6,Math.sin(a)*16),new THREE.Vector3(Math.cos(a+PI/12)*18,3,Math.sin(a+PI/12)*18),new THREE.Vector3(Math.cos(a+PI/6)*16,-4,Math.sin(a+PI/6)*16)];var g2=new THREE.BufferGeometry().setFromPoints(pts);glbG.add(new THREE.Line(g2,glbLM2));}
 var glbDM=new THREE.PointsMaterial({color:C.cyan,size:0.12,transparent:true,opacity:0,blending:THREE.AdditiveBlending});
 var glbDC=800;var glbDP=new Float32Array(glbDC*3);
+for(var i=0;i<glbDC;i++){var th=Math.random()*TAU,ph=Math.acos(2*Math.random()-1),r=18+Math.random()*5;glbDP[i*3]=Math.sin(ph)*Math.cos(th)*r;glbDP[i*3+1]=Math.sin(ph)*Math.sin(th)*r;glbDP[i*3+2]=Math.cos(ph)*r;}
+var glbDG=new THREE.BufferGeometry();glbDG.setAttribute("position",new THREE.BufferAttribute(glbDP,3));
+var glbD=new THREE.Points(glbDG,glbDM);glbG.add(glbD);
+var glbOrbitM=new THREE.MeshBasicMaterial({color:C.gold,transparent:true,opacity:0});
+var glbOrbit=new THREE.Mesh(new THREE.RingGeometry(21,21.3,64),glbOrbitM);glbOrbit.position.y=0;glbOrbit.rotation.x=PI/2.5;glbG.add(glbOrbit);
+var glbOrbit2=new THREE.Mesh(new THREE.RingGeometry(17,17.2,48),glbOrbitM);glbOrbit2.material.color.setHex(C.cyan);glbOrbit2.position.y=0;glbOrbit2.rotation.x=-PI/3;glbG.add(glbOrbit2);
+var hubG=new THREE.Group();scene.add(hubG);
+var hubM=new THREE.MeshPhysicalMaterial({color:C.blue,metalness:0.7,roughness:0.1,transparent:true,opacity:0,emissive:C.blue,emissiveIntensity:0.4,clearcoat:0.8});
+var hub=new THREE.Mesh(new THREE.SphereGeometry(0.8,24,24),hubM);hub.position.set(0,0,0);hubG.add(hub);
 </script>
 </body>
 </html>
