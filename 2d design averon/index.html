@@ -214,6 +214,15 @@ function mkArchCanvas(){
   for(var y=0;y<640;y+=30){cx.beginPath();cx.moveTo(0,y);cx.lineTo(1024,y);cx.stroke();}
   cx.fillStyle="rgba(34,211,238,0.04)";cx.roundRect(40,30,400,36,18);cx.fill();
   cx.fillStyle="rgba(34,211,238,0.5)";cx.font="bold 16px monospace";cx.textAlign="left";cx.textBaseline="middle";
+  cx.fillText("AVERON v4.0.0  SYSTEM ARCHITECTURE  MAINNET",56,48);
+  var archSections=["User Layer Wallet (secp256k1)","KYC/AML (4 Tiers)","Asset Tokenization (14-State FSM)","AI Pipeline (Gemini 2.0 Flash)","Blockchain (SHA-256 PoW)","Smart Contracts (Merkle Trees)","Liquidity Pools (Escrow)","Secondary Markets (Order Book)","Portfolio Dashboard"];
+  archSections.forEach(function(s,i){var bx=60+Math.random()*200,by=100+i*55;cx.fillStyle="rgba(34,211,238,0.03)";cx.roundRect(bx,by,340,28,14);cx.fill();cx.fillStyle="rgba(34,211,238,0.2)";cx.font="12px monospace";cx.textAlign="left";cx.fillText("  "+s,bx+16,by+16);});
+  var stats=["TX/s: 2,847","VALIDATORS: 143","FINALITY: 2.1s","TVL: $48.2M","ASSETS: 12,400"];
+  stats.forEach(function(s,i){cx.fillStyle="rgba(139,92,246,0.06)";cx.roundRect(800,40+i*38,170,26,13);cx.fill();cx.fillStyle="rgba(139,92,246,0.3)";cx.font="10px monospace";cx.textAlign="right";cx.fillText(s,960,56+i*38);});
+  return new THREE.CanvasTexture(c);
+}
+var bgDataSprM=new THREE.SpriteMaterial({map:mkArchCanvas(),transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+var bgDataSpr=new THREE.Sprite(bgDataSprM);bgDataSpr.scale.set(26,16.25,1);bgDataSpr.position.set(0,7,-14.5);scene.add(bgDataSpr);
 </script>
 </body>
 </html>
