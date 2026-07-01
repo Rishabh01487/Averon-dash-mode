@@ -223,6 +223,15 @@ function mkArchCanvas(){
 }
 var bgDataSprM=new THREE.SpriteMaterial({map:mkArchCanvas(),transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
 var bgDataSpr=new THREE.Sprite(bgDataSprM);bgDataSpr.scale.set(26,16.25,1);bgDataSpr.position.set(0,7,-14.5);scene.add(bgDataSpr);
+var vFC=300;var vFP=new Float32Array(vFC*3);var vFPh=new Float32Array(vFC);var vFSp=new Float32Array(vFC);
+var flowPath=[new THREE.Vector3(-5,5.5,0),new THREE.Vector3(0,6.5,2),new THREE.Vector3(4,3.5,0),new THREE.Vector3(0,2.5,-6),new THREE.Vector3(2,1.5,5.5),new THREE.Vector3(0,0.5,16)];
+for(var i=0;i<vFC;i++){vFPh[i]=Math.random()*TAU;vFSp[i]=0.06+Math.random()*0.08;vFP[i*3]=0;vFP[i*3+1]=0;vFP[i*3+2]=0;}
+var vFG2=new THREE.BufferGeometry();vFG2.setAttribute("position",new THREE.BufferAttribute(vFP,3));
+var vFM2=new THREE.PointsMaterial({color:C.blueL,size:0.04,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false,sizeAttenuation:true});
+var vfP=new THREE.Points(vFG2,vFM2);scene.add(vfP);
+var vfLM=new THREE.LineBasicMaterial({color:C.blueL,transparent:true,opacity:0});
+var vfLP=[];for(var i=0;i<flowPath.length;i++){vfLP.push(flowPath[i]);if(i<flowPath.length-1)vfLP.push(flowPath[i+1]);}
+var vfL=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(vfLP),vfLM);scene.add(vfL);
 </script>
 </body>
 </html>
