@@ -376,6 +376,15 @@ function animate(){
   trInvs.forEach(function(inv,i){var ap=clamp((s5-0.03*(i%20))*2,0,1);inv.mesh.children.forEach(function(m){if(m.material)m.material.opacity=lerp(0,1,easeOut(ap));});inv.mesh.position.y=inv.baseY+Math.sin(t*0.7+inv.phase)*0.03;});
   trPths.forEach(function(tp,i){tp.line.material.opacity=0.12*clamp(s5*2,0,1)*(0.4+0.6*Math.sin(t*tp.speed+tp.phase));});
   trPM.opacity=0.4*clamp(s5*2,0,1);
+  var trpp=trP.geometry.attributes.position.array;
+  for(var i=0;i<trPC;i++){var pIdx=Math.floor(Math.random()*trPths.length)%trPths.length;if(trPths[pIdx]){var progress=(t*0.3+i/trPC)%1;var ppos=trPths[pIdx].line.geometry.attributes.position;var idx=Math.floor(progress*(ppos.count-1));if(idx<ppos.count){trpp[i*3]=ppos.array[idx*3];trpp[i*3+1]=ppos.array[idx*3+1]+Math.sin(t*3+i)*0.05;trpp[i*3+2]=ppos.array[idx*3+2];}}}
+  trP.geometry.attributes.position.needsUpdate=true;
+  var obA=normalize(t,9.5,11.5);
+  obBgM.opacity=lerp(0,0.06,easeOut(obA))*clamp((1-normalize(t,17,18)),0,1);
+  obGridM.opacity=lerp(0,0.04,easeOut(obA))*clamp((1-normalize(t,17,18)),0,1);
+  obG.children.forEach(function(c){if(c.isMesh&&c.geometry.type==="BoxGeometry"&&c.material!==obBgM){c.material.opacity=lerp(0,0.4,easeOut(obA))*clamp((1-normalize(t,17,18)),0,1);}});
+  obPts.forEach(function(p,i){p.material.opacity=lerp(0,0.3,easeOut(obA))*(0.3+0.7*Math.sin(t*2+i))*clamp((1-normalize(t,17,18)),0,1);p.position.y+=Math.sin(t+i)*0.002;});
+  document.getElementById('l-tr-title').style.opacity=clamp((s5-0.2)*2,0,1)*clamp((1-normalize(t,17,18)),0,1);
 </script>
 </body>
 </html>
