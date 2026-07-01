@@ -295,6 +295,15 @@ function gCS(time){time=Math.max(0,Math.min(time,DURATION));var b=ckf[0],a=ckf[c
 var clock=new THREE.Clock();var elps=0;
 function updL(cam){
   var vw=window.innerWidth,vh=window.innerHeight;
+  Object.entries(lbs).forEach(function(e){var id=e[0],l=e[1];var v=new THREE.Vector3(l.wp[0],l.wp[1],l.wp[2]);v.project(cam);var x=(v.x*0.5+0.5)*vw,y=(-v.y*0.5+0.5)*vh;if(v.z<1&&x>-200&&x<vw+200&&y>-200&&y<vh+200){l.el.style.display="block";l.el.style.transform="translate(-50%,-50%) translate("+x+"px,"+y+"px)";}else l.el.style.display="none";});
+  lcEls.forEach(function(le,i){var px=0,py=9-i*0.7,pz=7;var vw2=window.innerWidth,vh2=window.innerHeight;var v=new THREE.Vector3(px,py,pz);v.project(cam);var x=(v.x*0.5+0.5)*vw2,y=(-v.y*0.5+0.5)*vh2;if(v.z<1&&x>-100&&x<vw2+100&&y>-100&&y<vh2+100){le.el.style.display="flex";le.el.style.transform="translate(-50%,-50%) translate("+x+"px,"+y+"px)";}else le.el.style.display="none";});
+}
+function animate(){
+  requestAnimationFrame(animate);
+  var dt=Math.min(clock.getDelta(),0.05);elps+=dt;if(elps>DURATION)elps-=DURATION;var t=elps;
+  var cs=gCS(t);
+  camera.position.x=cs.r*Math.sin(cs.th)*Math.cos(cs.ph);camera.position.y=cs.r*Math.sin(cs.ph);camera.position.z=cs.r*Math.cos(cs.th)*Math.cos(cs.ph);
+  camera.lookAt(cs.tg[0],cs.tg[1],cs.tg[2]);
 </script>
 </body>
 </html>
