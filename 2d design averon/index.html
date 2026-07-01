@@ -304,6 +304,15 @@ function animate(){
   var cs=gCS(t);
   camera.position.x=cs.r*Math.sin(cs.th)*Math.cos(cs.ph);camera.position.y=cs.r*Math.sin(cs.ph);camera.position.z=cs.r*Math.cos(cs.th)*Math.cos(cs.ph);
   camera.lookAt(cs.tg[0],cs.tg[1],cs.tg[2]);
+  // Scene 1: AI Core
+  var s1a=normalize(t,0,2);
+  aiNodes.forEach(function(n,i){var ap=clamp((s1a-i*0.05)*2,0,1);n.core.material.opacity=lerp(0,1,easeOut(ap));n.glow.material.opacity=lerp(0,0.15,easeOut(ap))*(0.5+0.5*Math.sin(t*2+i));n.ring.material.opacity=lerp(0,0.3,easeOut(ap));n.ring.scale.setScalar(1+Math.sin(t*1.5+i*1.2)*0.15);n.core.scale.setScalar(1+Math.sin(t*2+i*0.7)*0.05);});
+  var aip=aipSys.geometry.attributes.position.array;
+  for(var i=0;i<aipC;i++){var prog=(t*0.15+aipT[i])%5;var sIdx=Math.floor(prog);var n1=aiNodes[Math.min(sIdx,4)];if(n1){aip[i*3]=lerp(0,n1.yPos,0)+Math.sin(t*3+aipPh[i])*0.2;aip[i*3+1]=lerp(0,n1.yPos,prog%1)+Math.cos(t*2+aipPh[i])*0.2;aip[i*3+2]=Math.sin(t*2.5+aipPh[i])*0.2;}}
+  aipSys.geometry.attributes.position.needsUpdate=true;
+  aipMat.opacity=0.4*clamp(s1a*2,0,1)*clamp((1-normalize(t,4.5,5.5)),0,1);
+  document.getElementById("l-title-main").style.opacity=clamp(s1a*2,0,1)*clamp((1-normalize(t,2.5,3.5)),0,1);
+  document.getElementById("l-subtitle-main").style.opacity=clamp(s1a*2,0,1)*clamp((1-normalize(t,2.5,3.5)),0,1);
 </script>
 </body>
 </html>
