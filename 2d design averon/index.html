@@ -61,6 +61,15 @@ function mkMerkleTree(){
 }
 var merkle=mkMerkleTree();merkleG.add(merkle.g);merkleG.position.set(-1.5,3.5,-6);
 var tokG=new THREE.Group();scene.add(tokG);
+var tokRM=new THREE.MeshPhysicalMaterial({color:C.blue,metalness:0.5,roughness:0.15,transparent:true,opacity:0,emissive:C.blue,emissiveIntensity:0.3,side:THREE.DoubleSide});
+var tokR=new THREE.Mesh(new THREE.TorusGeometry(3.5,0.08,16,48),tokRM);tokR.rotation.x=PI/2.8;tokR.position.y=2.5;tokG.add(tokR);
+var tokIRM=new THREE.MeshPhysicalMaterial({color:C.violet,metalness:0.3,roughness:0.25,transparent:true,opacity:0,emissive:C.violet,emissiveIntensity:0.2,side:THREE.DoubleSide});
+var tokIR=new THREE.Mesh(new THREE.TorusGeometry(2.4,0.05,12,36),tokIRM);tokIR.rotation.x=PI/2.8;tokIR.position.y=2.5;tokG.add(tokIR);
+var tokDM=new THREE.MeshBasicMaterial({color:C.cyan,transparent:true,opacity:0,wireframe:true});
+var tokDome=new THREE.Mesh(new THREE.SphereGeometry(3.8,12,8,0,TAU,0,PI/3),tokDM);tokDome.position.y=2.5;tokDome.scale.y=0.6;tokG.add(tokDome);
+var tokPMat=new THREE.MeshPhysicalMaterial({color:C.cyan,transparent:true,opacity:0,emissive:C.cyan,emissiveIntensity:0.1});
+for(var i=0;i<12;i++){var a=(i/12)*TAU;var pMm=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.08,1.0,6),tokPMat);pMm.position.set(Math.cos(a)*3.5,2.5,Math.sin(a)*3.5);tokG.add(pMm);}
+var fracRing=new THREE.Mesh(new THREE.RingGeometry(1.5,2.5,32),new THREE.MeshBasicMaterial({color:C.emerald,transparent:true,opacity:0,side:THREE.DoubleSide,blending:THREE.AdditiveBlending}));fracRing.position.set(0,2.5,0);fracRing.rotation.x=PI/3;tokG.add(fracRing);
 </script>
 </body>
 </html>
