@@ -232,6 +232,15 @@ var vfP=new THREE.Points(vFG2,vFM2);scene.add(vfP);
 var vfLM=new THREE.LineBasicMaterial({color:C.blueL,transparent:true,opacity:0});
 var vfLP=[];for(var i=0;i<flowPath.length;i++){vfLP.push(flowPath[i]);if(i<flowPath.length-1)vfLP.push(flowPath[i+1]);}
 var vfL=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(vfLP),vfLM);scene.add(vfL);
+var ui2=document.getElementById("ui");var lbs={};
+var lDefs=[
+  {id:"title-main",text:"AVERON",cls:"stage-title",wp:[-5,7,-2]},
+  {id:"subtitle-main",text:"Where Value Becomes Infinite",cls:"badge",wp:[-5,6.2,-2]},
+  {id:"ai-title",text:"The Mind Awakens  AI Core",cls:"stage-title",wp:[-5,7,2]},
+  {id:"ai-gemini",text:"Gemini 2.0 Flash  Multi-Modal Intelligence",cls:"badge",wp:[-5,6.3,2]},
+  {id:"ai-ingest",text:"Data Streams Ingested",cls:"small",wp:[-5,3.8,2]},
+  {id:"ai-dup",text:"Immutability Verified",cls:"small",wp:[-5,2.4,2]},
+  {id:"ai-gemini-main",text:"Deep Analysis & Valuation",cls:"emerald",wp:[-5,1.0,2]},
 </script>
 </body>
 </html>
