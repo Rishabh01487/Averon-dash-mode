@@ -403,6 +403,15 @@ function animate(){
   var s7=normalize(t,12,16);
   eAs.forEach(function(a,i){var ap=clamp((s7-0.02*i)*2.5,0,1);a.mesh.material.opacity=lerp(0,0.8,easeOut(ap));a.glowRing.material.opacity=lerp(0,0.1,easeOut(ap));a.group.position.y=1.5+Math.sin(t*0.2+a.phase)*0.04;a.group.rotation.y=t*0.05+a.angle;a.glowRing.rotation.z=t*0.08;});
   cM2.opacity=0.05*clamp((s7-0.2)*2,0,1);
+  var glbA=normalize(t,11,14);glbWM.opacity=0.06*clamp(glbA*2,0,1);glbLM.opacity=0.04*clamp(glbA*2,0,1);glbDM.opacity=0.1*clamp(glbA*2,0,1);
+  glbW.rotation.y=t*0.02;glbW.rotation.x=Math.sin(t*0.01)*0.08;glbD.rotation.y=t*0.02;glbD.rotation.x=Math.sin(t*0.01)*0.06;
+  var hubA=normalize(t,11.5,14.5);hubM.opacity=0.4*clamp((hubA-0.1)*2,0,1);hubGM.opacity=0.06*clamp((hubA-0.2)*2,0,1);hubRM.opacity=0.05*clamp((hubA-0.3)*2,0,1)*Math.sin(t*1.5)*0.5+0.02;
+  hubG2.scale.setScalar(1+Math.sin(t*0.8)*0.08);hub.rotation.x=t*0.05;hub.rotation.y=t*0.08;
+  fAPM.opacity=0.4*clamp((hubA-0.3)*2,0,1);
+  var fap=fAP.geometry.attributes.position.array;
+  for(var i=0;i<fAPC;i++){var ea=eAs[i];if(!ea)continue;var ang=ea.angle;var r2=eR2;var prog=(t*0.12+fAPPh[i])%1;fap[i*3]=lerp(0,Math.cos(ang)*r2,prog)+Math.sin(t*2+i)*0.12;fap[i*3+1]=lerp(0,1.5+Math.sin(ang*2)*0.5+Math.sin(t*0.5+i)*0.3,prog)+Math.cos(t*1.5+i)*0.06;fap[i*3+2]=lerp(0,Math.sin(ang)*r2,prog)+Math.sin(t*2+i)*0.12;}
+  fAP.geometry.attributes.position.needsUpdate=true;
+  for(var i=0;i<ecoTypes.length;i++){document.getElementById("l-ec-"+i).style.opacity=clamp((s7-0.02*i-0.1)*2,0,1);}
 </script>
 </body>
 </html>
