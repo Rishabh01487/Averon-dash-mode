@@ -70,6 +70,15 @@ var tokDome=new THREE.Mesh(new THREE.SphereGeometry(3.8,12,8,0,TAU,0,PI/3),tokDM
 var tokPMat=new THREE.MeshPhysicalMaterial({color:C.cyan,transparent:true,opacity:0,emissive:C.cyan,emissiveIntensity:0.1});
 for(var i=0;i<12;i++){var a=(i/12)*TAU;var pMm=new THREE.Mesh(new THREE.CylinderGeometry(0.03,0.08,1.0,6),tokPMat);pMm.position.set(Math.cos(a)*3.5,2.5,Math.sin(a)*3.5);tokG.add(pMm);}
 var fracRing=new THREE.Mesh(new THREE.RingGeometry(1.5,2.5,32),new THREE.MeshBasicMaterial({color:C.emerald,transparent:true,opacity:0,side:THREE.DoubleSide,blending:THREE.AdditiveBlending}));fracRing.position.set(0,2.5,0);fracRing.rotation.x=PI/3;tokG.add(fracRing);
+var fracRing2=new THREE.Mesh(new THREE.RingGeometry(1.0,1.8,24),new THREE.MeshBasicMaterial({color:C.gold,transparent:true,opacity:0,side:THREE.DoubleSide,blending:THREE.AdditiveBlending}));fracRing2.position.set(0,2.5,0);fracRing2.rotation.x=-PI/4;tokG.add(fracRing2);
+var escrowG=new THREE.Group();scene.add(escrowG);
+var escM=new THREE.MeshPhysicalMaterial({color:C.gold,metalness:0.5,roughness:0.15,transparent:true,opacity:0,emissive:C.gold,emissiveIntensity:0.2});
+var escBox=new THREE.Mesh(new THREE.BoxGeometry(0.8,1.0,0.8),escM);escBox.position.set(0,0.5,0);escrowG.add(escBox);
+var escL=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(0.82,1.02,0.82)),new THREE.LineBasicMaterial({color:C.gold,transparent:true,opacity:0}));escrowG.add(escL);
+escrowG.position.set(0,1.5,-6);
+var tkCount=4000;var tkPos=new Float32Array(tkCount*3);var tkCol=new Float32Array(tkCount*3);var tkPh=new Float32Array(tkCount);var tkSP=new Float32Array(tkCount*3);var tkEP=new Float32Array(tkCount*3);
+for(var i=0;i<tkCount;i++){
+  var th=Math.random()*TAU,ph=Math.acos(2*Math.random()-1),r=0.3+Math.random()*1.5;
 </script>
 </body>
 </html>
