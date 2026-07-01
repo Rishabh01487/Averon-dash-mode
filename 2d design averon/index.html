@@ -151,6 +151,15 @@ for(var i=0;i<finPC;i++){finPPh[i]=Math.random()*TAU;finPP[i*3]=(Math.random()-0
 var finPG=new THREE.BufferGeometry();finPG.setAttribute("position",new THREE.BufferAttribute(finPP,3));
 var finPM=new THREE.PointsMaterial({color:C.cyan,size:0.03,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
 var finP=new THREE.Points(finPG,finPM);finG.add(finP);
+finG.position.set(2,2.5,-8);payG.position.set(2,0.5,-8);amlFlags.position.set(2,3.5,-8);
+var ecoG=new THREE.Group();scene.add(ecoG);
+var ecoTypes=[{name:"Real Estate",color:C.blue,size:1.0},{name:"Gold Reserves",color:C.gold,size:0.9},{name:"Agriculture",color:C.emerald,size:0.8},{name:"Solar Farms",color:C.cyan,size:0.7},{name:"Wind Energy",color:C.blueL,size:0.7},{name:"Hotels",color:C.pink,size:0.8},{name:"Warehouses",color:C.blue,size:0.8},{name:"Factories",color:C.blueD,size:0.9},{name:"Fine Art",color:C.gold,size:0.6},{name:"Businesses",color:C.emerald,size:0.8},{name:"Vehicles",color:C.pink,size:0.7},{name:"Inventory",color:C.cyan,size:0.7}];
+var eAs=[];var eR2=28;
+ecoTypes.forEach(function(a,i){
+  var s=a.size*0.35;var geo;var shapeIdx=i%5;
+  if(shapeIdx===0)geo=new THREE.BoxGeometry(s,s,s);else if(shapeIdx===1)geo=new THREE.SphereGeometry(s*0.8,12,12);else if(shapeIdx===2)geo=new THREE.ConeGeometry(s*0.7,s,8);else if(shapeIdx===3)geo=new THREE.TorusGeometry(s*0.6,s*0.2,8,12);else geo=new THREE.TorusKnotGeometry(s*0.5,s*0.15,12,8);
+  var g=new THREE.Mesh(geo,new THREE.MeshPhysicalMaterial({color:a.color,metalness:0.3,roughness:0.2,transparent:true,opacity:0,emissive:a.color,emissiveIntensity:0.15,clearcoat:0.3}));
+  var glowRing=new THREE.Mesh(new THREE.RingGeometry(s*0.5,s*0.7,24),new THREE.MeshBasicMaterial({color:a.color,transparent:true,opacity:0,side:THREE.DoubleSide,blending:THREE.AdditiveBlending}));glowRing.rotation.x=-PI/2;glowRing.position.y=-0.1;
 </script>
 </body>
 </html>
