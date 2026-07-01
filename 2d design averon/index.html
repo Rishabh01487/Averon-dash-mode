@@ -196,6 +196,15 @@ for(var i=0;i<3;i++){var hr=new THREE.Mesh(new THREE.RingGeometry(2.8+i*0.6,2.9+
 var fAPC=12;var fAPP=new Float32Array(fAPC*3);var fAPPh=new Float32Array(fAPC);
 for(var i=0;i<fAPC;i++){fAPPh[i]=Math.random()*TAU;fAPP[i*3]=0;fAPP[i*3+1]=0;fAPP[i*3+2]=0;}
 var fAPG=new THREE.BufferGeometry();fAPG.setAttribute("position",new THREE.BufferAttribute(fAPP,3));
+var fAPM=new THREE.PointsMaterial({color:C.blueL,size:0.15,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+var fAP=new THREE.Points(fAPG,fAPM);hubG.add(fAP);
+var bgGlassM=new THREE.MeshPhysicalMaterial({color:0xffffff,transparent:true,opacity:0,roughness:0.2,metalness:0.0,clearcoat:0.4,clearcoatRoughness:0.15,side:THREE.DoubleSide,depthWrite:false});
+var bgGlass=new THREE.Mesh(new THREE.PlaneGeometry(60,40),bgGlassM);bgGlass.position.set(0,6,-15);scene.add(bgGlass);
+var bgGlassL=new THREE.Mesh(new THREE.PlaneGeometry(40,35),bgGlassM.clone());bgGlassL.position.set(-18,5,-18);bgGlassL.rotation.y=0.5;scene.add(bgGlassL);
+var bgGlassR=new THREE.Mesh(new THREE.PlaneGeometry(40,35),bgGlassM.clone());bgGlassR.position.set(18,5,-18);bgGlassR.rotation.y=-0.5;scene.add(bgGlassR);
+function mkRoundRectGeo(w,h,r){var s=new THREE.Shape();s.moveTo(-w/2+r,-h/2);s.lineTo(w/2-r,-h/2);s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);s.lineTo(w/2,h/2-r);s.quadraticCurveTo(w/2,h/2,w/2-r,h/2);s.lineTo(-w/2+r,h/2);s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);s.lineTo(-w/2,-h/2+r);s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);return new THREE.ShapeGeometry(s);}
+function addGlBorder(mesh,w,h,r,clr){var bGeo=new THREE.EdgesGeometry(mkRoundRectGeo(w,h,r));var bLine=new THREE.LineSegments(bGeo,new THREE.LineBasicMaterial({color:clr,transparent:true,opacity:0,blending:THREE.AdditiveBlending}));bLine.position.copy(mesh.position);bLine.rotation.copy(mesh.rotation);scene.add(bLine);return bLine;}
+var bdr1=addGlBorder(bgGlass,59,39,2,C.cyan);
 </script>
 </body>
 </html>
