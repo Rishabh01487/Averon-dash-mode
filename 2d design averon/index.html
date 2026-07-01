@@ -412,6 +412,15 @@ function animate(){
   for(var i=0;i<fAPC;i++){var ea=eAs[i];if(!ea)continue;var ang=ea.angle;var r2=eR2;var prog=(t*0.12+fAPPh[i])%1;fap[i*3]=lerp(0,Math.cos(ang)*r2,prog)+Math.sin(t*2+i)*0.12;fap[i*3+1]=lerp(0,1.5+Math.sin(ang*2)*0.5+Math.sin(t*0.5+i)*0.3,prog)+Math.cos(t*1.5+i)*0.06;fap[i*3+2]=lerp(0,Math.sin(ang)*r2,prog)+Math.sin(t*2+i)*0.12;}
   fAP.geometry.attributes.position.needsUpdate=true;
   for(var i=0;i<ecoTypes.length;i++){document.getElementById("l-ec-"+i).style.opacity=clamp((s7-0.02*i-0.1)*2,0,1);}
+  document.getElementById('l-eco-title').style.opacity=clamp((s7-0.3)*2,0,1);
+  document.getElementById('l-subtitle-eco').style.opacity=clamp((s7-0.35)*2,0,1);
+  // Lifecycle + Enter
+  var lcA=normalize(t,14,18);lcEls.forEach(function(le,i){le.el.style.opacity=clamp((lcA-i*0.06)*3,0,1);});
+  document.getElementById("enter-btn").style.opacity=clamp((normalize(t,16,22)-0.15)*2,0,1);
+  // Value flow
+  var vfA=normalize(t,2,5);vFM2.opacity=0.3*clamp(vfA*2,0,1);vfLM.opacity=0.03*clamp(vfA*2,0,1);
+  var vfpa=vfP.geometry.attributes.position.array;
+  for(var i=0;i<vFC;i++){var ph=vFPh[i];var prog=(t*vFSp[i]+ph)%1;var idx=Math.floor(prog*(flowPath.length-1));var nxt=Math.min(idx+1,flowPath.length-1);var lr=prog*(flowPath.length-1)-idx;var p0=flowPath[idx],p1=flowPath[nxt];vfpa[i*3]=lerp(p0.x,p1.x,lr)+Math.sin(t*2+ph)*0.12;vfpa[i*3+1]=lerp(p0.y,p1.y,lr)+Math.cos(t*1.5+ph)*0.08;vfpa[i*3+2]=lerp(p0.z,p1.z,lr)+Math.sin(t*1.8+ph)*0.12;}
 </script>
 </body>
 </html>
