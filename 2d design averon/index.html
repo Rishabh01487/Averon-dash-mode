@@ -322,6 +322,15 @@ function animate(){
   fsmPM.opacity=0.25*clamp(s2*2,0,1);
   var fsmp=fsmP.geometry.attributes.position.array;
   for(var i=0;i<fsmPC;i++){var prog=(t*0.2+fsmPPh[i])%1;var idx=Math.floor(prog*(fsmStates.length-1));var nxt=Math.min(idx+1,fsmStates.length-1);var lr=prog*(fsmStates.length-1)-idx;var y0=fsmEls[idx]?fsmEls[idx].yPos:0;var y1=fsmEls[nxt]?fsmEls[nxt].yPos:0;fsmp[i*3]=Math.sin(t*2+fsmPPh[i])*0.3;fsmp[i*3+1]=lerp(y0,y1,lr)+Math.cos(t*1.5+fsmPPh[i])*0.1;fsmp[i*3+2]=Math.sin(t*1.8+fsmPPh[i])*0.3;}
+  fsmP.geometry.attributes.position.needsUpdate=true;
+  document.getElementById("l-fsm-title").style.opacity=clamp(normalize(t,3,4.5)*2,0,1)*clamp((1-normalize(t,7,8)),0,1);
+  document.getElementById("l-fsm-flow").style.opacity=clamp(normalize(t,3.5,5)*2,0,1)*clamp((1-normalize(t,7,8)),0,1);
+  // Scene 3: Blockchain
+  var s3=normalize(t,4,8);
+  bcB.forEach(function(b,i){var bAp=clamp((s3-i*0.06)*2,0,1);b.body.material.opacity=lerp(0,0.4,easeOut(bAp));b.shell.material.opacity=lerp(0,0.15,easeOut(bAp));b.edge.material.opacity=lerp(0,0.3,easeOut(bAp))*(0.5+0.5*Math.sin(t*1.2+i));b.dtMat.opacity=lerp(0,0.5,easeOut(bAp));if(b.ring){b.ring.material.opacity=lerp(0,0.1,easeOut(bAp))*(0.4+0.6*Math.sin(t*1.5+i*1.3));b.ring.scale.setScalar(1+Math.sin(t*1.2+i)*0.12);}b.group.rotation.y=lerp(-b.a*0.2,-b.a*0.2+0.2,bAp)+Math.sin(t*0.2+i)*0.02;b.group.position.y=1.5+Math.cos(b.a*0.8)*2.2+Math.sin(t*0.3+i)*0.05;if(b.beam)b.beam.material.opacity=0.15*easeOut(bAp);b.dgs.forEach(function(d,j){d.material.opacity=lerp(0,0.35,easeOut(bAp))*(0.2+0.8*Math.sin(t*d.userData.speed+d.userData.phase));var da=d.userData.angle+t*0.25*d.userData.speed;d.position.x=Math.cos(da)*d.userData.rad;d.position.z=Math.sin(da)*d.userData.rad;d.position.y=d.userData.dy+Math.sin(t*0.4+d.userData.phase)*0.1;});});
+  var mpT=t%2.0;var mp=normalize(mpT,0,2.0);var mIdx=Math.floor(mp*BC)%BC;
+  bcB.forEach(function(b,i){var dist=Math.abs(i-mIdx);var pulse=Math.max(0,1-dist*0.5)*Math.sin(mp*PI)*0.5;if(pulse>0.01){b.shell.material.emissiveIntensity=0.5*pulse;b.body.material.emissiveIntensity=0.05+pulse*0.3;}});
+  bcPM.opacity=0.35*clamp((s3-0.2)*2,0,1);bcDigM.opacity=0.12*clamp((s3-0.2)*2,0,1);
 </script>
 </body>
 </html>
