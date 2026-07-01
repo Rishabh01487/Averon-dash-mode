@@ -259,6 +259,15 @@ var lDefs=[
   {id:"tr-circuit",text:"The Circuit Breaker Stands Watch",cls:"gold",wp:[0,3.0,7]},
   {id:"tr-price-time",text:"Speed  Priority  Precision",cls:"badge",wp:[0,1.5,7]},
   {id:"tr-investors",text:"A Network of Believers",cls:"emerald",wp:[0,0,7]},
+  {id:"fin-title",text:"The Financial Frontier",cls:"stage-title",wp:[2,6.5,-9.5]},
+  {id:"fin-kyc",text:"Trust Ascends  4 Tiers of Identity",cls:"badge",wp:[2,5.5,-9.5]},
+  {id:"fin-aml",text:"The Watchtower  AML Defense Grid",cls:"pink",wp:[2,3,-9.5]},
+  {id:"fin-gateways",text:"Four Portals: Razorpay  Stripe  UPI  Wire",cls:"emerald",wp:[2,1,-9.5]},
+  {id:"eco-title",text:"AVERON  The Universe Unfolds",cls:"stage-title",wp:[0,18,0]},
+  {id:"subtitle-eco",text:"Real World Assets | AI | Blockchain | Boundless Liquidity",cls:"pink",wp:[0,16.5,0]},
+];
+lDefs.forEach(function(d){var el=document.createElement("div");el.className="label"+(d.cls?" "+d.cls:"");el.textContent=d.text;el.id="l-"+d.id;if(d.id==="title-main"){el.style.color="#22d3ee";el.style.fontSize="32px";el.style.letterSpacing="10px";el.style.fontWeight="800";el.style.background="transparent";el.style.backdropFilter="none";el.style.border="none";el.style.boxShadow="none";}if(d.id==="eco-title"){el.style.color="#22d3ee";el.style.fontSize="28px";el.style.letterSpacing="8px";el.style.fontWeight="700";el.style.background="transparent";el.style.backdropFilter="none";el.style.border="none";el.style.boxShadow="none";}ui2.appendChild(el);lbs[d.id]={el:el,wp:d.wp};});
+ecoTypes.forEach(function(a,i){var ang=(i/ecoTypes.length)*TAU-Math.PI/2;var el=document.createElement("div");el.className="label small";el.textContent=a.name;el.id="l-ec-"+i;ui2.appendChild(el);lbs["ec-"+i]={el:el,wp:[Math.cos(ang)*30,1.8+Math.sin(ang*2)*0.5,Math.sin(ang)*30]};});
 </script>
 </body>
 </html>
