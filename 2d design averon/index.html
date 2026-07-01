@@ -133,6 +133,15 @@ for(var i=0;i<4;i++){
 }
 var payG=new THREE.Group();scene.add(payG);
 var gateways=["Razorpay","Stripe","UPI","Wire"];
+var gwMeshes=[];
+gateways.forEach(function(name,i){
+  var g=new THREE.Group();
+  var panel=new THREE.Mesh(new THREE.PlaneGeometry(0.8,0.5),new THREE.MeshPhysicalMaterial({color:C.white,transparent:true,opacity:0,roughness:0.1,metalness:0.0,clearcoat:0.3,side:THREE.DoubleSide}));panel.position.set(0,0,0);g.add(panel);
+  var glow=new THREE.Mesh(new THREE.PlaneGeometry(0.9,0.6),new THREE.MeshBasicMaterial({color:[C.blue,C.violet,C.emerald,C.gold][i],transparent:true,opacity:0,blending:THREE.AdditiveBlending}));g.add(glow);
+  g.position.set((i-1.5)*2.5,0.5,0);payG.add(g);gwMeshes.push({g:g,panel:panel,glow:glow});
+});
+var amlShield=new THREE.Mesh(new THREE.RingGeometry(1.2,1.5,24),new THREE.MeshBasicMaterial({color:C.emerald,transparent:true,opacity:0,side:THREE.DoubleSide}));amlShield.position.set(0,3.5,0);finG.add(amlShield);
+var amlFlags=new THREE.Group();scene.add(amlFlags);
 </script>
 </body>
 </html>
