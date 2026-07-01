@@ -115,6 +115,15 @@ for(var i=0;i<40;i++){
   var mid=new THREE.Vector3((s.x+e.x)/2,0.5+Math.random()*2.0,(s.z+e.z)/2);
   var pts=new THREE.QuadraticBezierCurve3(s,mid,e).getPoints(20);
   var g1=new THREE.BufferGeometry().setFromPoints(pts);var m1=new THREE.LineBasicMaterial({color:trClrs[i%4],transparent:true,opacity:0});
+  var ln=new THREE.Line(g1,m1);trG.add(ln);trPths.push({line:ln,phase:Math.random()*TAU,speed:0.12+Math.random()*0.3});
+}
+var trPC=200;var trPP=new Float32Array(trPC*3);
+var trPG=new THREE.BufferGeometry();trPG.setAttribute("position",new THREE.BufferAttribute(trPP,3));
+var trPM=new THREE.PointsMaterial({color:C.cyan,size:0.03,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+var trP=new THREE.Points(trPG,trPM);trG.add(trP);
+var finG=new THREE.Group();scene.add(finG);
+var kycColors=[C.silver,C.blue,C.violet,C.gold];
+var kycTiers=[];
 </script>
 </body>
 </html>
