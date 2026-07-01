@@ -313,6 +313,15 @@ function animate(){
   aipMat.opacity=0.4*clamp(s1a*2,0,1)*clamp((1-normalize(t,4.5,5.5)),0,1);
   document.getElementById("l-title-main").style.opacity=clamp(s1a*2,0,1)*clamp((1-normalize(t,2.5,3.5)),0,1);
   document.getElementById("l-subtitle-main").style.opacity=clamp(s1a*2,0,1)*clamp((1-normalize(t,2.5,3.5)),0,1);
+  document.getElementById("l-ai-title").style.opacity=clamp(normalize(t,1.5,3)*2,0,1)*clamp((1-normalize(t,4.5,5.5)),0,1);
+  document.getElementById("l-ai-gemini").style.opacity=clamp(normalize(t,1.8,3)*2,0,1)*clamp((1-normalize(t,4.5,5.5)),0,1);
+  ['ai-ingest','ai-dup','ai-gemini-main','ai-fraud','ai-token-rec'].forEach(function(id,i){document.getElementById('l-'+id).style.opacity=clamp(normalize(t,1.5+i*0.2,2.5+i*0.2)*3,0,1)*clamp((1-normalize(t,4.5,5.5)),0,1);});
+  // Scene 2: FSM
+  var s2=normalize(t,3,6.5);
+  fsmEls.forEach(function(fe,i){var ap=clamp((s2-i*0.04)*2,0,1);fe.box.material.opacity=lerp(0,0.6,easeOut(ap));fe.ring.material.opacity=lerp(0,0.2,easeOut(ap))*(0.4+0.6*Math.sin(t*1.5+i));fe.ring.scale.setScalar(1+Math.sin(t+i)*0.15);});
+  fsmPM.opacity=0.25*clamp(s2*2,0,1);
+  var fsmp=fsmP.geometry.attributes.position.array;
+  for(var i=0;i<fsmPC;i++){var prog=(t*0.2+fsmPPh[i])%1;var idx=Math.floor(prog*(fsmStates.length-1));var nxt=Math.min(idx+1,fsmStates.length-1);var lr=prog*(fsmStates.length-1)-idx;var y0=fsmEls[idx]?fsmEls[idx].yPos:0;var y1=fsmEls[nxt]?fsmEls[nxt].yPos:0;fsmp[i*3]=Math.sin(t*2+fsmPPh[i])*0.3;fsmp[i*3+1]=lerp(y0,y1,lr)+Math.cos(t*1.5+fsmPPh[i])*0.1;fsmp[i*3+2]=Math.sin(t*1.8+fsmPPh[i])*0.3;}
 </script>
 </body>
 </html>
