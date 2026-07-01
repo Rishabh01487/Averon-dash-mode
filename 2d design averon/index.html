@@ -43,6 +43,15 @@ var bcPC=300;var bcPP=new Float32Array(bcPC*3);var bcPPh=new Float32Array(bcPC);
 for(var i=0;i<bcPC;i++){bcPPh[i]=Math.random()*TAU;bcPP[i*3]=0;bcPP[i*3+1]=0;bcPP[i*3+2]=0;}
 var bcPG=new THREE.BufferGeometry();bcPG.setAttribute("position",new THREE.BufferAttribute(bcPP,3));
 var bcPM=new THREE.PointsMaterial({color:C.blueL,size:0.06,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+var bcP=new THREE.Points(bcPG,bcPM);bcG.add(bcP);
+var bcDigC=60;var bcDigPos=new Float32Array(bcDigC*3);var bcDigPh=new Float32Array(bcDigC);
+for(var i=0;i<bcDigC;i++){bcDigPh[i]=Math.random()*TAU;bcDigPos[i*3]=(Math.random()-0.5)*8;bcDigPos[i*3+1]=1+Math.random()*4;bcDigPos[i*3+2]=-2+(Math.random()-0.5)*3;}
+var bcDigG=new THREE.BufferGeometry();bcDigG.setAttribute("position",new THREE.BufferAttribute(bcDigPos,3));
+var bcDigM=new THREE.PointsMaterial({color:C.cyan,size:0.04,transparent:true,opacity:0,blending:THREE.AdditiveBlending,depthWrite:false});
+var bcDigP=new THREE.Points(bcDigG,bcDigM);bcG.add(bcDigP);
+var merkleG=new THREE.Group();scene.add(merkleG);
+function mkMerkleTree(){
+  var g=new THREE.Group();var nodes=[];
 </script>
 </body>
 </html>
